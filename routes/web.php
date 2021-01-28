@@ -25,3 +25,5 @@ Route::get('/{username}/edit', [App\Http\Controllers\ProfileController::class, '
 Route::patch('/{username}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 Route::resource('{username}/posts', PostController::class);
+
+Route::post('{userid}/follow', [App\Http\Controllers\FollowController::class, 'store']);
