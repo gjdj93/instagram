@@ -4,13 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
     public function show(User $user) {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        return view('profile.show', compact('user', 'follows'));
+
+        $postCount = Cache::remember(
+            'count.posts.' . $user->id,
+            now()->addSeconds(30),
+            function() use ($user) {
+                return $user->posts->count();
+            }
+        );
+        $followersCount = Cache::remember(
+            'followers.count' . $user->id,
+            now()->addSeconds(30),
+            function() use ($user) {
+                return $user->profile->followers->count();
+            }
+        );
+        $followingCount = Cache::remember(
+            'following.count' . $user->id,
+            now()->addSeconds(30),
+            function() use ($user) {
+                return $user->following->count();
+            }
+        );
+
+        return view('profile.show', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
     }
 
     public function edit(User $user) {

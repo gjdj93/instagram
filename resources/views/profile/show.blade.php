@@ -19,9 +19,9 @@
                 </div>
             </div>
             <div class="d-flex flex-column d-sm-flex flex-sm-row my-4">
-                <div class="mr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
-                <div class="mr-5"><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
-                <div><strong>{{ $user->following->count() }}</strong> following</div>
+                <div class="mr-5"><strong>{{ $postCount }}</strong> posts</div>
+                <div class="mr-5"><strong>{{ $followersCount }}</strong> followers</div>
+                <div><strong>{{ $followingCount }}</strong> following</div>
             </div>
             <div class="mt-4 font-weight-bold">
                 <span>{{ $user->profile->title }}</span>
