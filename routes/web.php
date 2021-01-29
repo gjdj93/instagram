@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('/email/verify', function() {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
 
 Route::get('/{username}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
 Route::get('/{username}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');

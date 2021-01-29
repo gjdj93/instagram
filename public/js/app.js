@@ -1868,6 +1868,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/".concat(this.userId, "/follow")).then(function (response) {
         _this.status = !_this.status;
       })["catch"](function (errors) {
+        $('#follow-btn').after("<div class=\"alert alert-danger\">".concat(errors.response.data.message, "</div>"));
+
         if (errors.response.status == 401) {
           window.location = '/login';
         }
@@ -37388,6 +37390,7 @@ var render = function() {
     _c("button", {
       staticClass: "btn",
       class: { "btn-outline-primary": _vm.status, "btn-primary": !_vm.status },
+      attrs: { id: "follow-btn" },
       domProps: { textContent: _vm._s(_vm.buttonText) },
       on: { click: _vm.followUser }
     })

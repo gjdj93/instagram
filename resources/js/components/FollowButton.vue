@@ -1,6 +1,6 @@
 <template>
     <div class="px-2">
-        <button class="btn" @click="followUser" v-text="buttonText" v-bind:class="{'btn-outline-primary' : status, 'btn-primary' : !status}"></button>
+        <button id="follow-btn" class="btn" @click="followUser" v-text="buttonText" v-bind:class="{'btn-outline-primary' : status, 'btn-primary' : !status}"></button>
     </div>
 </template>
 
@@ -26,6 +26,7 @@
                         this.status = !this.status;
                     })
                     .catch(errors => {
+                        $('#follow-btn').after(`<div class="alert alert-danger">${errors.response.data.message}</div>`);
                         if (errors.response.status == 401) {
                             window.location = '/login';
                         }

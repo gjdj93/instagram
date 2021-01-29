@@ -21,6 +21,9 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, $guards = null)
     {
         if (Auth::check()) {
+            if (!Auth::user()->email_verified_at) {
+                return route('verification.notice');
+            }
             return redirect()->action([ProfileController::class, 'show', Auth::user()->username]);
         }
 
