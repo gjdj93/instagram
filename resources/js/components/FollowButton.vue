@@ -21,9 +21,8 @@
         },
         methods: {
             followUser() {
-                axios.post(`${this.userId}/follow`)
+                axios.post(`/${this.userId}/follow`)
                     .then(response => {
-                        console.log(response.data);
                         this.status = !this.status;
                     })
                     .catch(errors => {

@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -24,6 +21,7 @@ Route::get('/{username}', [App\Http\Controllers\ProfileController::class, 'show'
 Route::get('/{username}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/{username}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
+Route::get('/', [PostController::class, 'index']);
 Route::resource('{username}/posts', PostController::class);
 
 Route::post('{userid}/follow', [App\Http\Controllers\FollowController::class, 'store']);

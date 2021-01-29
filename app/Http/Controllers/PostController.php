@@ -9,6 +9,12 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $users = auth()->user()->following()->pluck('profiles.user_id');
+
+        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->get();
+
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -63,7 +73,8 @@ class PostController extends Controller
      */
     public function show(User $user, Post $post)
     {
-        return view('posts.show', compact('user', 'post'));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        return view('posts.show', compact('user', 'post', 'follows'));
     }
 
     /**

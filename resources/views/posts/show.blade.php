@@ -14,11 +14,13 @@
                     <h5 class="d-inline-block my-0 font-weight-bold"><a class="text-dark" href="{{ route('profile.show', $post->user->username) }}">{{ $post->user->username }}</a></h5>
                     @cannot('update', $post->user->profile)
                         <span class="px-3">&bull;</span>
-                        <a href="#">Follow</a>
+                        <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                     @endcannot
                 </div>
                 <hr>
                 <p><span class="font-weight-bold mr-2"><a class="text-dark" href="{{ route('profile.show', $post->user->username) }}">{{ $post->user->username }}</a></span>{{ $post->caption }}</p>
+                <hr>
+                <p><span class="text-muted">{{ $post->created_at->diffForHumans() }}</span></p>
             </div>
         </div>
 

@@ -86,7 +86,4 @@ class RegisterController extends Controller
             ?: redirect('/'.$user->username);
     }
 
-    protected function registered(Request $request, $user) {
-
-    }
 }
