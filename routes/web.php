@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +30,5 @@ Route::get('posts/{post}', [PostController::class, 'show']);
 Route::resource('{username}/posts', PostController::class);
 
 Route::post('{userid}/follow', [App\Http\Controllers\FollowController::class, 'store']);
+
+Route::post('posts/{post}/like', [App\Http\Controllers\PostLikeController::class, 'store']);

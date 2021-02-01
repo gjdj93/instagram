@@ -22,7 +22,7 @@
                         <div class="py-3 px-4">
                             <div class="d-flex mx-n1">
                                 <div class="like-button px-1">
-                                    <i class="far fa-heart fa-lg"></i>
+                                    <like-button post-id="{{ $post->id }}" liked="{{ $post->likedBy(auth()->user()) }}"></like-button>
                                 </div>
                                 <div class="comment-button px-1">
                                     <i class="far fa-comment fa-lg"></i>
@@ -31,7 +31,7 @@
                                     <i class="far fa-share-square fa-lg"></i>
                                 </div>
                             </div>
-                            <div class="likes font-weight-bold">0 likes</div>
+                            <div class="likes font-weight-bold">{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</div>
                             <div><small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></div>
                         </div>
                     </div>

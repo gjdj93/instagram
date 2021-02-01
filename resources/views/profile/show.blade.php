@@ -34,7 +34,7 @@
         @foreach ($user->posts as $post)
             <div class="col-4 py-3">
                 <div>
-                    <a href="{{$user->username}}/posts/{{ $post->id }}">
+                    <a href="/posts/{{ $post->id }}">
                         <img class="img-fluid" src="/storage/{{ $post->image }}" alt="{{ $post->caption }}"/>
                     </a>
                 </div>
