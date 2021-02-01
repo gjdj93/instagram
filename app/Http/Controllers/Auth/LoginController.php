@@ -45,6 +45,9 @@ class LoginController extends Controller
         if (!$user->email_verified_at) {
             $redirectURL = '/email/verify';
         }
+        if ($user->following->count() > 0) {
+            $redirectURL = '/';
+        }
         return redirect($redirectURL);
     }
 }

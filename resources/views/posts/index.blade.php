@@ -15,12 +15,24 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="">
-                            <a href="{{$post->user->username}}/posts/{{ $post->id }}">
+                            <a href="/posts/{{ $post->id }}">
                                 <img class="img-fluid" src="/storage/{{$post->image}}" alt="">
                             </a>
                         </div>
                         <div class="py-3 px-4">
-                            <p><span class="font-weight-bold mr-2"><a class="text-dark" href="{{ route('profile.show', $post->user->username) }}">{{ $post->user->username }}</a></span>{{ $post->caption }}</p>
+                            <div class="d-flex mx-n1">
+                                <div class="like-button px-1">
+                                    <i class="far fa-heart fa-lg"></i>
+                                </div>
+                                <div class="comment-button px-1">
+                                    <i class="far fa-comment fa-lg"></i>
+                                </div>
+                                <div class="share-button px-1">
+                                    <i class="far fa-share-square fa-lg"></i>
+                                </div>
+                            </div>
+                            <div class="likes font-weight-bold">0 likes</div>
+                            <div><small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></div>
                         </div>
                     </div>
                 </div>
