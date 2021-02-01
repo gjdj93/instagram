@@ -20,7 +20,19 @@
                 <hr>
                 <p><span class="font-weight-bold mr-2"><a class="text-dark" href="{{ route('profile.show', $post->user->username) }}">{{ $post->user->username }}</a></span>{{ $post->caption }}</p>
                 <hr>
-                <p><span class="text-muted">{{ $post->created_at->diffForHumans() }}</span></p>
+                <div class="d-flex mx-n1">
+                    <div class="like-button px-1">
+                        <like-button post-id="{{ $post->id }}" liked="{{ $post->likedBy(auth()->user()) }}"></like-button>
+                    </div>
+                    <div class="comment-button px-1">
+                        <i class="far fa-comment fa-lg"></i>
+                    </div>
+                    <div class="share-button px-1">
+                        <i class="far fa-share-square fa-lg"></i>
+                    </div>
+                </div>
+                <div class="likes font-weight-bold">{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</div>
+                <div><small class="text-muted text-uppercase">{{ $post->created_at->diffForHumans() }}</small></div>
             </div>
         </div>
 

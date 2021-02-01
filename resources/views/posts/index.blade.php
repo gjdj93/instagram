@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="likes font-weight-bold">{{ $post->likes->count() }} {{ Str::plural('like', $post->likes->count()) }}</div>
-                            <div><small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></div>
+                            <div><small class="text-muted text-uppercase">{{ $post->created_at->diffForHumans() }}</small></div>
                         </div>
                     </div>
                 </div>
