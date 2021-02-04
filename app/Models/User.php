@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NewUserWelcomeMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,10 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->profile()->create([
                 'title' => $user->username,
             ]);
-
-            // send email on register
-
-            Mail::to($user->email)->send(new NewUserWelcomeMail());
         });
     }
 
