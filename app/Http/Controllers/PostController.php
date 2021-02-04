@@ -24,7 +24,7 @@ class PostController extends Controller
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
 
-        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->get();
+        $posts = Post::whereIn('user_id', $users)->orWhere('user_id', auth()->user()->id)->with('user')->latest()->get();
 
         return view('posts.index', compact('posts'));
     }
