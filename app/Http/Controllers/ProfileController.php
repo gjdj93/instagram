@@ -20,14 +20,14 @@ class ProfileController extends Controller
             }
         );
         $followersCount = Cache::remember(
-            'followers.count' . $user->id,
+            'followers.count.' . $user->id,
             now()->addSeconds(30),
             function() use ($user) {
                 return $user->profile->followers->count();
             }
         );
         $followingCount = Cache::remember(
-            'following.count' . $user->id,
+            'following.count.' . $user->id,
             now()->addSeconds(30),
             function() use ($user) {
                 return $user->following->count();
@@ -63,8 +63,14 @@ class ProfileController extends Controller
             $validated['image'] = null;
         }
 
-        auth()->user()->profile->update(array_merge($validated, $imageArr ?? []));
+        $user->profile->update(array_merge($validated, $imageArr ?? []));
 
-        return view('profile.show', compact('user'));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+        $postCount = Cache::get('count.posts.' . $user->id);
+        $followersCount = Cache::get('followers.count.' . $user->id);
+        $followingCount = Cache::get('following.count.' . $user->id);
+
+        return view('profile.show', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
     }
 }
